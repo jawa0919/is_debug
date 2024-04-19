@@ -29,10 +29,6 @@ private func wrapError(_ error: Any) -> [Any?] {
   ]
 }
 
-private func createConnectionError(withChannelName channelName: String) -> FlutterError {
-  return FlutterError(code: "channel-error", message: "Unable to establish connection on channel: '\(channelName)'.", details: "")
-}
-
 private func isNullish(_ value: Any?) -> Bool {
   return value is NSNull || value == nil
 }
@@ -77,37 +73,6 @@ class IsDebugHostApiSetup {
       }
     } else {
       isDebugHostChannel.setMessageHandler(nil)
-    }
-  }
-}
-/// Generated protocol from Pigeon that represents Flutter messages that can be called from Swift.
-protocol IsDebugFlutterApiProtocol {
-  func getFlutterArgs(string stringArg: String?, completion: @escaping (Result<String, FlutterError>) -> Void)
-}
-class IsDebugFlutterApi: IsDebugFlutterApiProtocol {
-  private let binaryMessenger: FlutterBinaryMessenger
-  init(binaryMessenger: FlutterBinaryMessenger){
-    self.binaryMessenger = binaryMessenger
-  }
-  func getFlutterArgs(string stringArg: String?, completion: @escaping (Result<String, FlutterError>) -> Void) {
-    let channelName: String = "dev.flutter.pigeon.is_debug.IsDebugFlutterApi.getFlutterArgs"
-    let channel = FlutterBasicMessageChannel(name: channelName, binaryMessenger: binaryMessenger)
-    channel.sendMessage([stringArg] as [Any?]) { response in
-      guard let listResponse = response as? [Any?] else {
-        completion(.failure(createConnectionError(withChannelName:channelName)))
-        return
-      }
-      if (listResponse.count > 1) {
-        let code: String = listResponse[0] as! String
-        let message: String? = nilOrValue(listResponse[1])
-        let details: String? = nilOrValue(listResponse[2])
-        completion(.failure(FlutterError(code: code, message: message, details: details)));
-      } else if (listResponse[0] == nil) {
-        completion(.failure(FlutterError(code: "null-error", message: "Flutter api returned null value for non-null return value.", details: "")))
-      } else {
-        let result = listResponse[0] as! String
-        completion(.success(result))
-      }
     }
   }
 }

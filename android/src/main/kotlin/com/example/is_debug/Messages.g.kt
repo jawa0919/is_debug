@@ -30,9 +30,6 @@ private fun wrapError(exception: Throwable): List<Any?> {
   }
 }
 
-private fun createConnectionError(channelName: String): FlutterError {
-  return FlutterError("channel-error",  "Unable to establish connection on channel: '$channelName'.", "")}
-
 /**
  * Error class for passing custom error details to Flutter via a thrown PlatformException.
  * @property code The error code.
@@ -89,34 +86,6 @@ interface IsDebugHostApi {
           channel.setMessageHandler(null)
         }
       }
-    }
-  }
-}
-/** Generated class from Pigeon that represents Flutter messages that can be called from Kotlin. */
-@Suppress("UNCHECKED_CAST")
-class IsDebugFlutterApi(private val binaryMessenger: BinaryMessenger) {
-  companion object {
-    /** The codec used by IsDebugFlutterApi. */
-    val codec: MessageCodec<Any?> by lazy {
-      StandardMessageCodec()
-    }
-  }
-  fun getFlutterArgs(stringArg: String?, callback: (Result<String>) -> Unit) {
-    val channelName = "dev.flutter.pigeon.is_debug.IsDebugFlutterApi.getFlutterArgs"
-    val channel = BasicMessageChannel<Any?>(binaryMessenger, channelName, codec)
-    channel.send(listOf(stringArg)) {
-      if (it is List<*>) {
-        if (it.size > 1) {
-          callback(Result.failure(FlutterError(it[0] as String, it[1] as String, it[2] as String?)))
-        } else if (it[0] == null) {
-          callback(Result.failure(FlutterError("null-error", "Flutter api returned null value for non-null return value.", "")))
-        } else {
-          val output = it[0] as String
-          callback(Result.success(output))
-        }
-      } else {
-        callback(Result.failure(createConnectionError(channelName)))
-      } 
     }
   }
 }

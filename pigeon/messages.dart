@@ -18,8 +18,8 @@ abstract class IsDebugHostApi {
 // #enddocregion host-definitions
 
 // #docregion flutter-definitions
-@FlutterApi()
-abstract class IsDebugFlutterApi {
-  String getFlutterArgs(String? string);
-}
+// @FlutterApi()
+// abstract class IsDebugFlutterApi {
+//   String getFlutterArgs(String? string);
+// }
 // #enddocregion flutter-definitions
