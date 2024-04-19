@@ -1,5 +1,5 @@
 name: is_debug
-description: A new Flutter project.
+description: Determine if the app is running in debug mode.
 version: 0.0.1
 homepage:
 
