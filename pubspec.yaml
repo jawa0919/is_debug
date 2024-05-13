@@ -1,0 +1,35 @@
+name: is_debug
+description: Get host info
+version: 0.0.8
+
+homepage: https://github.com/jawa0919/is_debug
+repository: https://github.com/jawa0919/is_debug
+issue_tracker: https://github.com/jawa0919/is_debug/issues
+
+screenshots:
+  - description: "Examples is runing android"
+    path: docs/img/and.png
+  - description: "Examples is runing ios"
+    path: docs/img/ios.png
+
+environment:
+  sdk: ">=3.0.6 <4.0.0"
+  flutter: ">=3.3.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: top.jawa0919.is_debug
+        pluginClass: IsDebugPlugin
+      ios:
+        pluginClass: IsDebugPlugin
